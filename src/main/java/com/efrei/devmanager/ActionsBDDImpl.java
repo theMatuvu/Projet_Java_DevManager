@@ -27,4 +27,16 @@ public class ActionsBDDImpl implements ActionsBDD{
     public Programmeur getProgrammeur(int id) {
         return programmeurJpa.findById(id).orElse(null);
     }
+
+    @Override
+    public void deleteProgrammeur(int id) {
+        programmeurJpa.deleteById(id);
+    }
+
+    @Override
+    public void updateProgrammeurSalaire(int programmeurId, double salaire) {
+        Programmeur programmeur = programmeurJpa.findById(programmeurId).get();
+        programmeur.setSalaire(salaire);
+        programmeurJpa.save(programmeur);
+    }
 }

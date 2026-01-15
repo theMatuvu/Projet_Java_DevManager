@@ -9,4 +9,7 @@ public interface ActionsBDD {
     public Programmeur getProgrammeur(int id);
 
 
+    void deleteProgrammeur(int id);
+
+    void updateProgrammeurSalaire(int idProgrammeur, double salaire);
 }

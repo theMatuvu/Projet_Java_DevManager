@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class Programmeur {
     @Id
-    private int id;
+    private Integer id;
     private String nom;
     private String prenom;
     private String adresse;

@@ -8,9 +8,9 @@ import java.util.Scanner;
 
 public class Menu implements CommandLineRunner {
 
-    private final ActionsBDDImpl actionsBDDImpl;
+    private final ActionsBDD actionsBDDImpl;
 
-    public Menu(ActionsBDDImpl actionsBDDImpl) {
+    public Menu(ActionsBDD actionsBDDImpl) {
         this.actionsBDDImpl = actionsBDDImpl;
     }
 
@@ -49,6 +49,8 @@ public class Menu implements CommandLineRunner {
     }
 
     private void traiterChoix(int choix) {
+        Scanner scanner = new Scanner(System.in);
+
         switch (choix) {
             case 1:
                 actionsBDDImpl.getProgrammeurs().forEach(programmeur -> {
@@ -57,7 +59,6 @@ public class Menu implements CommandLineRunner {
                 break;
             case 2:
                 // Code pour afficher un programmeur
-                Scanner scanner = new Scanner(System.in);
                 System.out.println("Entrez l'ID du programmeur : ");
                 int id = scanner.nextInt();
                 Programmeur programmeur = actionsBDDImpl.getProgrammeur(id);
@@ -65,14 +66,23 @@ public class Menu implements CommandLineRunner {
                 break;
             case 3:
                 // Code pour supprimer un programmeur
+                scanner = new Scanner(System.in);
+                System.out.println("Entrez l'ID du programmeur : ");
+                id = scanner.nextInt();
+                actionsBDDImpl.deleteProgrammeur(id);
+
                 break;
             case 4:
                 // Code pour ajouter un programmeur
-
                 actionsBDDImpl.insertProgrammeur(createProgrammeur());
                 break;
             case 5:
                 // Code pour modifier le salaire
+                System.out.println("Entrez l'ID du programmeur : ");
+                id = scanner.nextInt();
+                System.out.println("Entrez le nouveau salaire : ");
+                double salaire = scanner.nextDouble();
+                actionsBDDImpl.updateProgrammeurSalaire(id, salaire);
                 break;
             case 6:
                 // Code pour afficher la liste des projets
