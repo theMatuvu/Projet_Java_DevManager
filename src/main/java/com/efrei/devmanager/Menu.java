@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Scanner;
 @Component
 
-public class Menu implements CommandLineRunner {
+public class Menu  {
 
     private final ActionsBDD actionsBDDImpl;
 
@@ -14,7 +14,6 @@ public class Menu implements CommandLineRunner {
         this.actionsBDDImpl = actionsBDDImpl;
     }
 
-    @Override
     public void run(String... args) {
         int choix = 0;
         do {
