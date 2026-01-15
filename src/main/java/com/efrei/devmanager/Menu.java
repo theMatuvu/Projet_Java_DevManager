@@ -1,16 +1,16 @@
 package com.efrei.devmanager;
 
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
-@Component
 
-public class Menu  {
+@Component
+public class Menu {
 
     private final InterfaceChoix choixImpl;
 
-    public Menu(InterfaceChoix choixImpl) {
+    public Menu(@Qualifier("consoleImplementation") InterfaceChoix choixImpl) {
         this.choixImpl = choixImpl;
     }
 
@@ -48,34 +48,32 @@ public class Menu  {
     }
 
     private void traiterChoix(int choix) {
-        Scanner scanner = new Scanner(System.in);
+        ConsoleImplementation consoleImpl = (ConsoleImplementation) choixImpl;
 
         switch (choix) {
             case 1:
-                choixImpl.printProgrammeurs();
+                consoleImpl.printProgrammeurs();
+                break;
             case 2:
-                // Code pour afficher un programmeur
-                choixImpl.printProgrammeur();
+                consoleImpl.printProgrammeur();
+                break;
             case 3:
-                // Code pour supprimer un programmeur
-               choixImpl.deleteProgrammeur();
+                consoleImpl.deleteProgrammeurFromConsole();
                 break;
             case 4:
-                // Code pour ajouter un programmeur
-                choixImpl.addProgrammeur();
+                consoleImpl.addProgrammeurFromConsole();
                 break;
             case 5:
-                // Code pour modifier le salaire
-                choixImpl.updateProgrammeurSalaire();
+                consoleImpl.updateProgrammeurSalaireFromConsole();
                 break;
             case 6:
-                // Code pour afficher la liste des projets
+                consoleImpl.printProjectList();
                 break;
             case 7:
-                // Code pour obtenir la liste des programmeurs sur le même projet
+                consoleImpl.programmerListByProject();
                 break;
             case 8:
-                // Code pour quitter le programme
+                System.out.println("Au revoir !");
                 break;
             default:
                 System.out.println("Choix invalide. Veuillez réessayer.");

@@ -1,7 +1,8 @@
 package com.efrei.devmanager.Controllers;
 
-import com.efrei.devmanager.ActionsBDD;
 import com.efrei.devmanager.Programmeur;
+import com.efrei.devmanager.RestImplementation;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,10 @@ import java.util.List;
 @CrossOrigin(origins = "*") // Permet l'accès depuis n'importe quelle origine (frontend externe)
 public class ProgrammeurController {
 
-    private final ActionsBDD actionsBDD;
+    private final RestImplementation restImplementation;
 
-    public ProgrammeurController(ActionsBDD actionsBDD) {
-        this.actionsBDD = actionsBDD;
+    public ProgrammeurController(@Qualifier("restImplementation") RestImplementation restImplementation) {
+        this.restImplementation = restImplementation;
     }
 
     /**
@@ -25,7 +26,7 @@ public class ProgrammeurController {
      */
     @GetMapping
     public ResponseEntity<List<Programmeur>> getAllProgrammeurs() {
-        List<Programmeur> programmeurs = actionsBDD.getProgrammeurs();
+        List<Programmeur> programmeurs = restImplementation.getAllProgrammeurs();
         return ResponseEntity.ok(programmeurs);
     }
 
@@ -35,7 +36,7 @@ public class ProgrammeurController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Programmeur> getProgrammeurById(@PathVariable int id) {
-        Programmeur programmeur = actionsBDD.getProgrammeur(id);
+        Programmeur programmeur = restImplementation.getProgrammeurById(id);
         if (programmeur == null) {
             return ResponseEntity.notFound().build();
         }
@@ -49,7 +50,7 @@ public class ProgrammeurController {
     @PostMapping
     public ResponseEntity<String> createProgrammeur(@RequestBody Programmeur programmeur) {
         try {
-            actionsBDD.insertProgrammeur(programmeur);
+            restImplementation.addProgrammeur(programmeur);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("Programmeur créé avec succès");
         } catch (Exception e) {
@@ -67,11 +68,11 @@ public class ProgrammeurController {
             @PathVariable int id,
             @RequestParam double salaire) {
         try {
-            Programmeur programmeur = actionsBDD.getProgrammeur(id);
+            Programmeur programmeur = restImplementation.getProgrammeurById(id);
             if (programmeur == null) {
                 return ResponseEntity.notFound().build();
             }
-            actionsBDD.updateProgrammeurSalaire(id, salaire);
+            restImplementation.updateProgrammeurSalaire(id, salaire);
             return ResponseEntity.ok("Salaire mis à jour avec succès");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -86,15 +87,27 @@ public class ProgrammeurController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteProgrammeur(@PathVariable int id) {
         try {
-            Programmeur programmeur = actionsBDD.getProgrammeur(id);
+            Programmeur programmeur = restImplementation.getProgrammeurById(id);
             if (programmeur == null) {
                 return ResponseEntity.notFound().build();
             }
-            actionsBDD.deleteProgrammeur(id);
+            restImplementation.deleteProgrammeur(id);
             return ResponseEntity.ok("Programmeur supprimé avec succès");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Erreur lors de la suppression du programmeur: " + e.getMessage());
         }
     }
-}
+    /**
+     * GET /api/programmeurs/{id}/projets
+     * Récupère tous les projets d'un programmeur
+     */
+    @GetMapping("/{id}/projets")
+    public ResponseEntity<List<com.efrei.devmanager.Projet>> getProjetsByProgrammeur(@PathVariable int id) {
+        try {
+            List<com.efrei.devmanager.Projet> projets = restImplementation.getProjetsByProgrammeur(id);
+            return ResponseEntity.ok(projets);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }}
