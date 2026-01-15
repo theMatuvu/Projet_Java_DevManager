@@ -55,18 +55,28 @@ public class Menu  {
                 choixImpl.printProgrammeurs();
             case 2:
                 // Code pour afficher un programmeur
-                choixImpl.printProgrammeur();
+                System.out.println("Entrez l'ID du programmeur : ");
+                int id = new java.util.Scanner(System.in).nextInt();
+                choixImpl.printProgrammeur(id);
             case 3:
                 // Code pour supprimer un programmeur
-               choixImpl.deleteProgrammeur();
+                System.out.println("Entrez l'ID du programmeur : ");
+                id = new java.util.Scanner(System.in).nextInt();
+               choixImpl.deleteProgrammeur(id);
                 break;
             case 4:
                 // Code pour ajouter un programmeur
-                choixImpl.addProgrammeur();
+                Programmeur programmeur = createProgrammeur();
+                choixImpl.addProgrammeur(programmeur);
                 break;
             case 5:
                 // Code pour modifier le salaire
-                choixImpl.updateProgrammeurSalaire();
+                scanner = new java.util.Scanner(System.in);
+                System.out.println("Entrez l'ID du programmeur : ");
+                id = scanner.nextInt();
+                System.out.println("Entrez le nouveau salaire : ");
+                double salaire = scanner.nextDouble();
+                choixImpl.updateProgrammeurSalaire(id, salaire);
                 break;
             case 6:
                 // Code pour afficher la liste des projets
@@ -81,6 +91,31 @@ public class Menu  {
                 System.out.println("Choix invalide. Veuillez réessayer.");
         }
     }
+
+    public Programmeur createProgrammeur(){
+        Programmeur programmeur = new Programmeur();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Entrez le nom : ");
+        programmeur.setNom(scanner.nextLine());
+        System.out.println("Entrez le prénom : ");
+        programmeur.setPrenom(scanner.nextLine());
+        System.out.println("Entrez l'adresse : ");
+        programmeur.setAdresse(scanner.nextLine());
+        System.out.println("Entrez le pseudo : ");
+        programmeur.setPseudo(scanner.nextLine());
+        System.out.println("Entrez le responsable : ");
+        programmeur.setResponsable(scanner.nextLine());
+        System.out.println("Entrez le hobby : ");
+        programmeur.setHobby(scanner.nextLine());
+        System.out.println("Entrez l'année de naissance : ");
+        programmeur.setNaissance(scanner.nextInt());
+        System.out.println("Entrez le salaire : ");
+        programmeur.setSalaire(scanner.nextDouble());
+        System.out.println("Entrez la prime : ");
+        programmeur.setPrime(scanner.nextDouble());
+        return programmeur;
+    }
+
 
 
 }
