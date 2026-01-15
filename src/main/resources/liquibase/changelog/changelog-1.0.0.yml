@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: author
+      changes:
+        - sqlFile:
+            path: migration/1.0.0.sql

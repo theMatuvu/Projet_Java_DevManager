@@ -5,4 +5,5 @@ spring:
     url: jdbc:mysql://localhost:3306/devmanagerdb
     username: root
     password: ""
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
