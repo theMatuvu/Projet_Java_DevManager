@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 public class Menu  {
 
-    private final ActionsBDD actionsBDDImpl;
+    private final InterfaceChoix choixImpl;
 
-    public Menu(ActionsBDD actionsBDDImpl) {
-        this.actionsBDDImpl = actionsBDDImpl;
+    public Menu(InterfaceChoix choixImpl) {
+        this.choixImpl = choixImpl;
     }
 
     public void run(String... args) {
@@ -52,36 +52,21 @@ public class Menu  {
 
         switch (choix) {
             case 1:
-                actionsBDDImpl.getProgrammeurs().forEach(programmeur -> {
-                    System.out.println(programmeur);
-                });
-                break;
+                choixImpl.printProgrammeurs();
             case 2:
                 // Code pour afficher un programmeur
-                System.out.println("Entrez l'ID du programmeur : ");
-                int id = scanner.nextInt();
-                Programmeur programmeur = actionsBDDImpl.getProgrammeur(id);
-                System.out.println(programmeur);
-                break;
+                choixImpl.printProgrammeur();
             case 3:
                 // Code pour supprimer un programmeur
-                scanner = new Scanner(System.in);
-                System.out.println("Entrez l'ID du programmeur : ");
-                id = scanner.nextInt();
-                actionsBDDImpl.deleteProgrammeur(id);
-
+               choixImpl.deleteProgrammeur();
                 break;
             case 4:
                 // Code pour ajouter un programmeur
-                actionsBDDImpl.insertProgrammeur(createProgrammeur());
+                choixImpl.addProgrammeur();
                 break;
             case 5:
                 // Code pour modifier le salaire
-                System.out.println("Entrez l'ID du programmeur : ");
-                id = scanner.nextInt();
-                System.out.println("Entrez le nouveau salaire : ");
-                double salaire = scanner.nextDouble();
-                actionsBDDImpl.updateProgrammeurSalaire(id, salaire);
+                choixImpl.updateProgrammeurSalaire();
                 break;
             case 6:
                 // Code pour afficher la liste des projets
@@ -98,27 +83,4 @@ public class Menu  {
     }
 
 
-    public Programmeur createProgrammeur(){
-        Programmeur programmeur = new Programmeur();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Entrez le nom : ");
-        programmeur.setNom(scanner.nextLine());
-        System.out.println("Entrez le prénom : ");
-        programmeur.setPrenom(scanner.nextLine());
-        System.out.println("Entrez l'adresse : ");
-        programmeur.setAdresse(scanner.nextLine());
-        System.out.println("Entrez le pseudo : ");
-        programmeur.setPseudo(scanner.nextLine());
-        System.out.println("Entrez le responsable : ");
-        programmeur.setResponsable(scanner.nextLine());
-        System.out.println("Entrez le hobby : ");
-        programmeur.setHobby(scanner.nextLine());
-        System.out.println("Entrez l'année de naissance : ");
-        programmeur.setNaissance(scanner.nextInt());
-        System.out.println("Entrez le salaire : ");
-        programmeur.setSalaire(scanner.nextDouble());
-        System.out.println("Entrez la prime : ");
-        programmeur.setPrime(scanner.nextDouble());
-        return programmeur;
-    }
 }
