@@ -17,8 +17,7 @@ public class RestImplementation implements InterfaceChoix {
         this.actionsBDD = actionsBDD;
     }
 
-    // ========== Méthodes Programmeur ==========
-    
+
     @Override
     public List<Programmeur> getAllProgrammeurs() {
         return actionsBDD.getProgrammeurs();
@@ -44,8 +43,7 @@ public class RestImplementation implements InterfaceChoix {
         actionsBDD.updateProgrammeurSalaire(id, salaire);
     }
     
-    // ========== Méthodes Projet ==========
-    
+
     @Override
     public List<Projet> getAllProjets() {
         return actionsBDD.getProjets();
@@ -71,8 +69,7 @@ public class RestImplementation implements InterfaceChoix {
         actionsBDD.updateProjet(projet);
     }
     
-    // ========== Méthodes relation Programmeur-Projet ==========
-    
+
     @Override
     public void assignProgrammeurToProjet(int programmeurId, int projetId) {
         actionsBDD.assignProgrammeurToProjet(programmeurId, projetId);

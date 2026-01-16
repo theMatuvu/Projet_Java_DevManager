@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.front_devmanager.controller.ProjetsViewController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <!-- En-tête -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label text="Gestion des Projets" styleClass="view-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Rechercher..." prefWidth="250"/>
+    </HBox>
+
+    <!-- Barre d'actions -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button fx:id="addButton" text="Nouveau Projet" styleClass="button-primary" onAction="#handleAddProjet"/>
+        <Button text="Modifier" styleClass="button-success" onAction="#handleEditProjet"/>
+        <Button text="Gérer Participants" styleClass="button-secondary" onAction="#handleGererParticipants"/>
+        <Button text="Supprimer" styleClass="button-danger" onAction="#handleDeleteProjet"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="refreshButton" text="Actualiser" styleClass="button-secondary" onAction="#loadProjets"/>
+    </HBox>
+
+    <!-- Table des projets -->
+    <TableView fx:id="projetsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="60"/>
+            <TableColumn fx:id="intituleColumn" text="Intitulé" prefWidth="250"/>
+            <TableColumn fx:id="participantsColumn" text="Participants" prefWidth="200"/>
+            <TableColumn fx:id="dateDebutColumn" text="Début" prefWidth="120"/>
+            <TableColumn fx:id="dateFinPrevueColumn" text="Fin prévue" prefWidth="120"/>
+            <TableColumn fx:id="etatColumn" text="État" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</VBox>

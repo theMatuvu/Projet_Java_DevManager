@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.front_devmanager.controller.ProgrammeursViewController"
+      styleClass="view-container"
+      spacing="20">
+    
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <!-- En-tête -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label text="Gestion des Programmeurs" styleClass="view-title"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField" promptText="Rechercher..." prefWidth="250"/>
+    </HBox>
+
+    <!-- Barre d'actions -->
+    <HBox spacing="15" alignment="CENTER_LEFT">
+        <Button fx:id="addButton" text="Nouveau Programmeur" styleClass="button-primary" onAction="#handleAddProgrammeur"/>
+        <Button text="Modifier" styleClass="button-success" onAction="#handleEditProgrammeur"/>
+        <Button text="Modifier Salaire" styleClass="button-secondary" onAction="#handleUpdateSalaire"/>
+        <Button text="Supprimer" styleClass="button-danger" onAction="#handleDeleteProgrammeur"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="refreshButton" text="Actualiser" styleClass="button-secondary" onAction="#loadProgrammeurs"/>
+    </HBox>
+
+    <!-- Table des programmeurs -->
+    <TableView fx:id="programmeursTable" VBox.vgrow="ALWAYS" styleClass="data-table">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="60" styleClass="table-column-header"/>
+            <TableColumn fx:id="nomColumn" text="Nom" prefWidth="120" styleClass="table-column-header"/>
+            <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="120" styleClass="table-column-header"/>
+            <TableColumn fx:id="pseudoColumn" text="Pseudo" prefWidth="100" styleClass="table-column-header"/>
+            <TableColumn fx:id="adresseColumn" text="Adresse" prefWidth="150" styleClass="table-column-header"/>
+            <TableColumn fx:id="responsableColumn" text="Responsable" prefWidth="120" styleClass="table-column-header"/>
+            <TableColumn fx:id="hobbyColumn" text="Hobby" prefWidth="100" styleClass="table-column-header"/>
+            <TableColumn fx:id="naissanceColumn" text="Année" prefWidth="80" styleClass="table-column-header"/>
+            <TableColumn fx:id="salaireColumn" text="Salaire" prefWidth="100"/>
+            <TableColumn fx:id="primeColumn" text="Prime" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+</VBox>

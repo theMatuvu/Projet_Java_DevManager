@@ -15,8 +15,7 @@ public class ActionsBDDImpl implements ActionsBDD{
         this.projetJpa = projetJpa;
     }
 
-    // ========== Méthodes Programmeur ==========
-    
+
     @Override
     public void insertProgrammeur(Programmeur programmeur) {
         programmeurJpa.save(programmeur);
@@ -44,8 +43,7 @@ public class ActionsBDDImpl implements ActionsBDD{
         programmeurJpa.save(programmeur);
     }
     
-    // ========== Méthodes Projet ==========
-    
+
     @Override
     public void insertProjet(Projet projet) {
         projetJpa.save(projet);
@@ -71,8 +69,7 @@ public class ActionsBDDImpl implements ActionsBDD{
         projetJpa.save(projet);
     }
     
-    // ========== Méthodes relation Programmeur-Projet ==========
-    
+
     @Override
     public void assignProgrammeurToProjet(int programmeurId, int projetId) {
         Programmeur programmeur = programmeurJpa.findById(programmeurId).orElse(null);
